@@ -8,7 +8,9 @@ class RecipeNode(DjangoObjectType):
     class Meta:
         model = Recipe
         interfaces = (Node,)
-        filter_fields = ["title", "amounts"]
+        filter_fields = {
+            "amounts__ingredient__name": ["exact", "icontains", "istartswith"]
+        }
 
 
 class RecipeIngredientNode(DjangoObjectType):
